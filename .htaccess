@@ -1,0 +1,13 @@
+
+# # av:Toolbar
+SetEnv AV_TOOLBAR 0
+
+# # av:php5-engine
+AddHandler av-php73 .php
+
+<filesMatch ".(jpg|jpeg|png|gif|svg|css|ttf|eot|woff|woff2)$">
+Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+<filesMatch ".(js)$">
+Header set Cache-Control "max-age=31536000, private"
+</filesMatch>

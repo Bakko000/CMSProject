@@ -8,7 +8,7 @@ include '../inc/functions.php';
 
 session_start();
 
-if(is_auth($_SESSION['uid'], $_POST["blog_id"])) { // Se sei autore del blog corrente
+if(is_auth($_SESSION['uid'], $_POST["blog_id"]) || is_auth_post($_SESSION["uid"], $_POST["post_id"])) { // Se sei autore del blog corrente o del post corrente
 
 if(isset($_POST["post_id"]) && isset($_POST["blog_id"])) { // E i parametri sono stati compilati
 

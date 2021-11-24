@@ -1,7 +1,7 @@
 <?php
 
 /* In questo file sono presenti delle funzioni che eseguono controlli fondamentali per il funzionamento del sistema.
-Esse sono chiamate poi più volte in blog.php, nuovopost.php, topics.php e relativi templates a ciascun file associati. */
+Esse sono chiamate poi più volte in blog.php, nuovopost.php, register.php, nuovoblog.php, topics.php e relativi templates a ciascun file associati. */
 
 
 // Controlla se l'utente corrente è stato escluso dai commenti nel blog corrente
@@ -173,6 +173,39 @@ function show_coauths($blog)
         echo "nessuno";
    }
 }
+
+
+
+
+// Controlla se l'utente corrente è autore del post corrente
+function is_auth_post($user, $post)
+{
+
+   require(dirname(dirname(__FILE__)) . '/config/database.php');  ## Include il file per caricare PDO
+
+   try {
+
+      $query = "SELECT pid FROM post WHERE authid=:uid AND pid=:pid";
+      $result = $pdo->prepare($query);
+      $result->bindParam(':uid', $user);
+      $result->bindParam(':pid', $post);
+      $result->execute();
+   } catch (PDOException $e) {
+
+      echo "" . $e->getMessage() . "";
+      exit();
+   }
+
+   $row = $result->fetchAll();
+
+   if (count($row) > 0) {
+
+      return true;
+   }
+
+   return false;
+}
+
 
 
 
@@ -384,3 +417,25 @@ function canban($user, $blog, $banned, $post)
 
    return false;
 }
+
+
+
+
+// Controlla formato e dimensione delle foto in input
+function upcheckfiles($input, $maxlength) {
+
+   $extension = pathinfo($_FILES[$input]['name'], PATHINFO_EXTENSION);
+   $dimension = $_FILES[$input]['size'];
+
+   $validi = array("", "jpg", "tiff", "raw", "png", "jpeg");
+
+   if(in_array($extension, $validi)) { 
+
+         if ($dimension < $maxlength) {
+
+            return true;
+
+      }
+
+   }
+}  return false;

@@ -4,6 +4,7 @@
 
 include './elementicomuni/headcomune.php';
 include './particomuni/header.php';
+include './inc/functions.php';
 
 
 session_start(); //Avvio la sessione.
@@ -60,6 +61,8 @@ if (isset($_SESSION) && isset($_SESSION["uid"]) && isset($_SESSION["user"])) {
     $coauth = trim(htmlspecialchars($_POST["coauth"]));
     $img1 = file_get_contents($_FILES['img1']['tmp_name']);
 
+   if(upcheckfiles("img1", 3145728)) {  // Controllo che la dimensione sia corretta, minore di 3MB e il formato accettato
+
     //Controllo che i parametri non siano vuoti (lo faccio anche in HTML)
     if (
       isset($titolo) && $titolo != ""
@@ -109,16 +112,23 @@ if (isset($_SESSION) && isset($_SESSION["uid"]) && isset($_SESSION["user"])) {
         //Se l'inserimento va a buon fine si viene diretti al blog appena creato
         echo "<script> window.location.replace('blog.php?action=viewblog&id=" . $bid . "') </script>";
         exit();
-      } else {
+      } else {  // Limite caratteri superato
         echo '<div class="alert alert-danger" role="alert">Sei andato oltre il limite caratteri consentito.</div>';
         exit();
       }
-    } else {
+      
+     } else {  // Campi non compilati
       echo '<div class="alert alert-danger" role="alert">Compila tutti i campi!</div>';
       exit();
+     }
+    
+    } else {  // Formato o dimensione errati
+      echo '<div class="alert alert-danger" role="alert">Dimensione o formato errati. 3MB consentiti e solo formati immagini/fotografici.</div>';
+      exit();
     }
+
   }
-} else {
+} else {  // Invito a registrarsi per creare un nuovo blog
   echo "<div class='alert alert-danger' role='alert'>Per creare un nuovo blog, entra o registrati.</div>";
   include 'login.php';
   exit();

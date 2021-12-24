@@ -84,7 +84,7 @@
                                     </div>
                                     <div class=" stats">
                                         <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                        <?php echo date("d/m/Y", strtotime($blog['data'])); ?> <!-- Stampa la data come giorno/mese/anno e porta l'orario
+                                        <?php echo date("d/m/Y", strtotime($blog['data'])); ?> <!-- Stampa la data come giorno/mese/anno e porta l'orario -->
                                     </div>
                                 </div>
                             </div>

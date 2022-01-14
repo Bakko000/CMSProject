@@ -1,5 +1,5 @@
 # CMSProject
-Final Project of "Database and Web Programming" course. CMS for blogging. Final evaluation mark: 30/30
+Final Project of "Database and Web Programming" course. CMS for blogging. <b>Final evaluation mark: 30/30</b>
 
 # Requirements
 

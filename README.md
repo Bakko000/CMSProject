@@ -4,7 +4,7 @@ Final Project of "Database and Web Programming" course. CMS for blogging. <b>Fin
 
 # Preview 
 
-https://webcreativedesign.altervista.org/
+https://hydrerscript.altervista.org/
 
 
 # Requirements
